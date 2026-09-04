@@ -1,0 +1,823 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>six months, still us ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Mono:wght@300;400&family=Sacramento&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #0b090a;
+    color: #ddd3cd;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+}
+
+/* FILM GRAIN */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .055;
+    z-index: 999;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* FLOATING HEARTS */
+
+.heart {
+    position: fixed;
+    bottom: -20px;
+    color: #9d7778;
+    font-size: 13px;
+    pointer-events: none;
+    animation: float 8s linear forwards;
+    z-index: 2;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .6;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+/* INTRO */
+
+.intro {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    position: relative;
+}
+
+.intro-content {
+    max-width: 650px;
+}
+
+.small {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8d7775;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: clamp(55px, 10vw, 110px);
+    font-weight: 300;
+    line-height: .85;
+    letter-spacing: -4px;
+}
+
+.script {
+    font-family: 'Sacramento', cursive;
+    font-size: clamp(45px, 8vw, 80px);
+    color: #a98283;
+}
+
+.intro p {
+    margin-top: 35px;
+    font-size: 19px;
+    line-height: 1.7;
+    color: #a69b96;
+}
+
+.enter {
+    display: inline-block;
+    margin-top: 45px;
+    padding: 13px 25px;
+    border: 1px solid #493d3d;
+    color: #c9b9b2;
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    transition: .4s;
+}
+
+.enter:hover {
+    background: #21191a;
+    border-color: #856667;
+}
+
+/* SECTIONS */
+
+section {
+    min-height: 100vh;
+    padding: 120px 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+}
+
+.number {
+    font-family: 'DM Mono', monospace;
+    color: #765b5b;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: clamp(45px, 7vw, 75px);
+    font-weight: 300;
+    margin-bottom: 35px;
+}
+
+.text {
+    max-width: 620px;
+    font-size: 21px;
+    line-height: 1.8;
+    color: #aaa09b;
+}
+
+.highlight {
+    color: #b78c8d;
+}
+
+/* MEMORY CARD */
+
+.memory {
+    margin-top: 60px;
+    padding: 30px;
+    border-left: 1px solid #493c3c;
+    background: #100d0e;
+}
+
+.memory span {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #806b69;
+    letter-spacing: 2px;
+}
+
+.memory p {
+    margin-top: 15px;
+    font-size: 24px;
+}
+
+/* QUESTS */
+
+.quest-section {
+    background: #0e0b0c;
+}
+
+.quest {
+    margin: 25px 0;
+    border: 1px solid #342c2c;
+    padding: 25px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.quest:hover {
+    border-color: #765b5b;
+    transform: translateX(5px);
+}
+
+.quest-title {
+    font-size: 21px;
+}
+
+.quest-description {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: #776967;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+.answer {
+    display: none;
+    margin-top: 20px;
+    color: #b8aaa5;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.quest.open .answer {
+    display: block;
+}
+
+/* POLAROIDS */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 35px;
+    margin-top: 50px;
+}
+
+.polaroid {
+    background: #d8cec4;
+    padding: 10px 10px 35px;
+    transform: rotate(-2deg);
+    transition: .5s;
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(3deg);
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) translateY(-10px);
+}
+
+.polaroid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    filter: sepia(.25) contrast(.9);
+}
+
+.polaroid p {
+    color: #332c29;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* FINAL */
+
+.final {
+    text-align: center;
+    min-height: 100vh;
+}
+
+.final .heart-big {
+    font-size: 45px;
+    color: #a98283;
+    animation: beat 2s infinite;
+}
+
+@keyframes beat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.final h2 {
+    font-size: clamp(45px, 8vw, 85px);
+    font-weight: 300;
+    margin: 30px 0;
+}
+
+.final p {
+    max-width: 600px;
+    margin: auto;
+    font-size: 21px;
+    line-height: 1.8;
+    color: #9e9490;
+}
+
+/* MUSIC BUTTON */
+
+.music {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10;
+    background: #151011;
+    border: 1px solid #443737;
+    color: #a98b8b;
+    padding: 12px 15px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    section {
+        padding: 100px 25px;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .text {
+        font-size: 19px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- INTRO -->
+
+<div class="intro">
+
+    <div class="intro-content">
+
+        <div class="small">
+            a little something for you
+        </div>
+
+        <h1>
+            six months
+            <br>
+            <span class="script">of us.</span>
+        </h1>
+
+        <p>
+            Six months of memories.<br>
+            Six months of choosing each other.<br>
+            And somehow, through everything...
+            <br><br>
+            <span class="highlight">still us.</span>
+        </p>
+
+        <a href="#story" class="enter">
+            ENTER OUR LITTLE WORLD ♡
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- STORY -->
+
+<section id="story">
+
+<div class="container">
+
+    <div class="number">01 / OUR STORY</div>
+
+    <h2 class="title">
+        It wasn't always easy.
+    </h2>
+
+    <p class="text">
+
+        We didn't get the perfect love story.
+
+        <br><br>
+
+        We got difficult days.
+        Misunderstandings.
+        Moments that tested us.
+        Things that made us question
+        what would happen next.
+
+        <br><br>
+
+        But somewhere between all those
+        difficult moments...
+
+        <br><br>
+
+        <span class="highlight">
+        we kept choosing each other.
+        </span>
+
+    </p>
+
+    <div class="memory">
+
+        <span>ONE THING I WILL ALWAYS REMEMBER</span>
+
+        <p>
+            We could have given up.
+            But we didn't.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- PRIDE -->
+
+<section>
+
+<div class="container">
+
+    <div class="number">02 / FOR YOU</div>
+
+    <h2 class="title">
+        I'm proud of you.
+    </h2>
+
+    <p class="text">
+
+        I hope you know that I see you.
+
+        <br><br>
+
+        I see the things you try to do.
+        I see the things you carry.
+        I see the moments when things
+        aren't easy for you.
+
+        <br><br>
+
+        And even when you don't feel
+        proud of yourself...
+
+        <br><br>
+
+        <span class="highlight">
+        I am proud of you.
+        </span>
+
+        <br><br>
+
+        Not because everything is perfect.
+
+        But because you keep trying.
+
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- SUPPORT -->
+
+<section>
+
+<div class="container">
+
+    <div class="number">03 / MY PROMISE</div>
+
+    <h2 class="title">
+        You don't have to do it alone.
+    </h2>
+
+    <p class="text">
+
+        I can't promise that life will
+        always be easy.
+
+        <br><br>
+
+        But I can promise that I'll
+        keep believing in you.
+
+        <br><br>
+
+        I'll celebrate your victories.
+        I'll listen on the difficult days.
+        I'll remind you of your strength
+        when you forget it.
+
+        <br><br>
+
+        And I'll keep standing beside you.
+
+        <br><br>
+
+        <span class="highlight">
+        I'm your support. Always.
+        </span>
+
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- QUESTS -->
+
+<section class="quest-section">
+
+<div class="container">
+
+    <div class="number">04 / LITTLE QUESTS</div>
+
+    <h2 class="title">
+        For you to discover ♡
+    </h2>
+
+    <p class="text">
+        Don't read everything at once.
+        Click around.
+        There are little pieces of my heart
+        hidden here.
+    </p>
+
+
+    <div class="quest">
+
+        <div class="quest-title">
+            ♡ Quest 01 — What do I love about you?
+        </div>
+
+        <div class="quest-description">
+            click to reveal
+        </div>
+
+        <div class="answer">
+            I love the person you are.
+            Your heart, your effort,
+            your little habits,
+            and the way you make
+            ordinary moments feel special.
+        </div>
+
+    </div>
+
+
+    <div class="quest">
+
+        <div class="quest-title">
+            ♡ Quest 02 — What makes me stay?
+        </div>
+
+        <div class="quest-description">
+            click to reveal
+        </div>
+
+        <div class="answer">
+            You.
+            Even after the difficult days,
+            there is still a part of me
+            that looks at you and thinks,
+            "yes... it's still you."
+        </div>
+
+    </div>
+
+
+    <div class="quest">
+
+        <div class="quest-title">
+            ♡ Quest 03 — My favourite memory
+        </div>
+
+        <div class="quest-description">
+            click to reveal
+        </div>
+
+        <div class="answer">
+            This one is waiting for your
+            favourite memory to be added.
+            Maybe it's a silly moment.
+            Maybe it's a completely ordinary day.
+            Sometimes those become our
+            favourite memories.
+        </div>
+
+    </div>
+
+
+    <div class="quest">
+
+        <div class="quest-title">
+            ♡ Quest 04 — One thing I want
+        </div>
+
+        <div class="quest-description">
+            click to reveal
+        </div>
+
+        <div class="answer">
+            More memories.
+            More stupid jokes.
+            More late-night conversations.
+            More ordinary days together.
+            More chapters of us.
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- MEMORIES -->
+
+<section>
+
+<div class="container">
+
+    <div class="number">05 / OUR MEMORIES</div>
+
+    <h2 class="title">
+        little moments.
+    </h2>
+
+    <p class="text">
+        Replace these pictures with your
+        favourite memories.
+    </p>
+
+    <div class="gallery">
+
+        <div class="polaroid">
+            <img src="photo1.jpg">
+            <p>our beginning ♡</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="photo2.jpg">
+            <p>one of my favourites</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="photo3.jpg">
+            <p>just us</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="photo4.jpg">
+            <p>another little memory</p>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="final">
+
+<div class="container">
+
+    <div class="heart-big">♡</div>
+
+    <h2>
+        still choosing you.
+    </h2>
+
+    <p>
+
+        Six months.
+
+        <br><br>
+
+        We've been through things
+        that weren't always easy.
+
+        <br><br>
+
+        But when I look back,
+        I don't only see the difficult moments.
+
+        I see us.
+
+        <br><br>
+
+        And I'm grateful.
+
+        <br><br>
+
+        Thank you for staying.
+        Thank you for being you.
+        Thank you for letting me love you.
+
+        <br><br>
+
+        <span class="highlight">
+        Happy 6 months, my love.
+        </span>
+
+        <br><br>
+
+        Here's to every chapter
+        we haven't written yet.
+
+        <br><br>
+
+        ♡
+
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- MUSIC -->
+
+<button class="music" onclick="toggleMusic()">
+    ♫ LOFI
+</button>
+
+<audio id="music" loop>
+    <source src="lofi.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+
+/* QUESTS */
+
+document.querySelectorAll('.quest').forEach(quest => {
+
+    quest.addEventListener('click', () => {
+
+        quest.classList.toggle('open');
+
+    });
+
+});
+
+
+/* FLOATING HEARTS */
+
+function createHeart() {
+
+    const heart = document.createElement('div');
+
+    heart.className = 'heart';
+
+    heart.innerHTML = Math.random() > .5 ? '♡' : '♥';
+
+    heart.style.left = Math.random() * 100 + 'vw';
+
+    heart.style.animationDuration =
+        (6 + Math.random() * 5) + 's';
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 11000);
+
+}
+
+setInterval(createHeart, 1800);
+
+
+/* MUSIC */
+
+function toggleMusic() {
+
+    const music = document.getElementById('music');
+
+    if (music.paused) {
+
+        music.play();
+
+        document.querySelector('.music').innerHTML = '♫ PLAYING';
+
+    } else {
+
+        music.pause();
+
+        document.querySelector('.music').innerHTML = '♫ LOFI';
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+```
